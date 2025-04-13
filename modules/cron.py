@@ -98,19 +98,14 @@ class CronScheduler(Service):
         #i = i[1].split()
         #for i2 in t.schedule.split():
         i2 = t.schedule.split()
+        print(i2)
         try:
           if (t.enabled and t.task and self.check_tt(i2[0], mm) and
             self.check_tt(i2[1], hh) and self.check_tt(i2[2], dw+1) and
             self.check_tt(i2[3], dd)  and self.check_tt(i2[4], my)):
-        
-        #if i[0] == dd && i[1] == dw && i[2] == hh && i[3] == mm:
-            #await i[4]()
-            #asyncio.create_task( i[2](i[3]))
-          #print("try_run_task:", hh, mm, t.id, t.task, type(t.params))
             print(f"run_task: {hh}:{mm}",  t.id, t.label, t.params)
-            if type(t.params) in (list,tuple,int,): t.task(*t.params)  
-            if type(t.params)==dict: t.task(**t.params)  
-            #if i.task: i.task(i.params)  
+            if type(t.params) in (list,tuple,int,): t.task(*t.params)
+            if type(t.params)==dict: t.task(**t.params)
             await asyncio.sleep(3)
         except Exception as e:
           print(f"run_task_error: {hh}:{mm}", t.id, t.label, t.params)
