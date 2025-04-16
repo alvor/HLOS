@@ -5,9 +5,7 @@ import time
 from machine import Pin
 
 class GPIO_board(Service):
-    #state = {'time': None, "name": "GPIO_board", "label":"GPIO board control", "type":"web_standard", "data": []}
     AW_LEN = 1
-    #pins = {}
 
     def __init__(self, pins:list, **kwargs):  ##pin(n, in/out, PULL)
       super().__init__(**kwargs)

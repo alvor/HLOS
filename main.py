@@ -47,6 +47,8 @@ class init( ):
         ], name="GPIO_board", group=2)
         os_kernel.add_task(pins)
 
+        pumps = PumpOnGPIO()
+
         # Инициализация веб-интерфейса
         web = WebServer(name="WebServer", kernel=os_kernel)
         #self.web.devs = self.devs
@@ -72,7 +74,7 @@ class init( ):
 
         cron.append_command( 22,  pins.set_value, 'Включить LED', (2, 0))
         cron.append_command( 11,  pins.set_value, 'Отключить LED', {"id":2, "value":1} )
-        cron.append_command(  7, PumpOnGPIO.start,'Включить насос', [2,60])
+        cron.append_command(  7, pumps.start,'Включить насос', [12,60])
 
         #print("Starting OS Kernel")
         os_kernel.start()

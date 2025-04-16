@@ -4,31 +4,13 @@ from machine import Pin
 
 class PumpOnGPIO(Service):
     def __init__(self):
-        super().__init__(**kwargs)
+        super().__init__(self)
 
+    def start(self, pin, duration):
+        self.pin = Pin(pin, Pin.OUT)
+        self.pin.value(1)
+        asyncio.create_task(self.stop_in_duration(duration))
 
-    async def start(self, pin, duration):
-        _p = Pin(pin, Pin.OUT)
-
-        # Включаем насос
-        _p.value(1)
-
-        # Обновляем состояние, аналогично как в GPIO_board
-        for i in self.state['data']:
-            if i['id'] == pin and i.get("control"):
-                i['value'] = _p.value()  # Обновляем значение состояния
-                self.state['time'] = time.time()
-                asyncio.create_task(self.subscribe_handler())  # Обработчик событий (по аналогии с GPIO_board)
-
-        # Ожидаем заданную продолжительность
-        await asyncio.sleep(duration)
-
-        # Выключаем насос
-        _p.value(0)
-
-        # Снова обновляем состояние
-        for i in self.state['data']:
-            if i['id'] == pin and i.get("control"):
-                i['value'] = _p.value()  # Обновляем значение состояния
-                self.state['time'] = time.time()
-                asyncio.create_task(self.subscribe_handler())  # Обработчик событий
+    async def stop_in_duration(self, dur):
+        await asyncio.sleep(dur)
+        self.pin.value(0)
