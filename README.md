@@ -1,4 +1,4 @@
-# py-Tosha-1
+# HydroLED Operation System 
 
 ## ESP32 based micro system, for remote control this device
 ```
@@ -29,7 +29,6 @@ modules - папка для модулей расширения, каждый м
 /modules - модули расширения устройства, 
 
 /web/ui - папка с вашим интерфейсом для этого проекта,
- можно разработать свой или взять из проекта [ui-Tosha-1](https://github.com/devaros/ui-Tosha-1) 
 
 
 ### Customize configuration
