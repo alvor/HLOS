@@ -4,9 +4,7 @@
 ```
 This code must be upload to ESP32 chip microPython based 
 ```
-![image info](/doc/01-index.jpg)
 
-[другие картинки проекта](/doc/images.md)
 
 
 ## Structure code
